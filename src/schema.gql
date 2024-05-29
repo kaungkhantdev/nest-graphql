@@ -2,10 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AppHelloOutput {
-  message: String!
+type User {
+  id: Int!
+  name: String!
+  age: Int!
+  email: String
 }
 
 type Query {
-  sayHello: AppHelloOutput!
+  getUser: User!
 }
