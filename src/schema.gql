@@ -2,13 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type UserSetting {
+  userId: Int!
+  show: Boolean
+  isActive: Boolean!
+}
+
 type User {
   id: Int!
-  name: String!
+
+  """Name"""
+  name: String! @deprecated(reason: "Not useful in v2 schema")
   age: Int!
   email: String
+  setting: UserSetting
 }
 
 type Query {
-  getUser: User!
+  getUserById(id: Int!): User
+  getUsers: [User!]
 }
