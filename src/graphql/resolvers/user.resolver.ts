@@ -5,10 +5,12 @@ import {
   Int,
   ResolveField,
   Parent,
+  Mutation,
 } from '@nestjs/graphql';
 import { User } from '../models/user.model';
 import { mockUsers, mockUserSetting } from '../__mock__/users';
 import { UserSetting } from '../models/user-setting.model';
+import { CreateUserInput } from '../inputs/create-user-input';
 
 @Resolver((of) => User)
 export class UserResolver {
@@ -25,5 +27,16 @@ export class UserResolver {
   @ResolveField((returns) => UserSetting, { name: 'setting', nullable: true })
   async getUserSetting(@Parent() user: User) {
     return mockUserSetting.find((set) => set.userId == user.id);
+  }
+
+  @Mutation((returns) => User)
+  createUser(@Args('createUserData') createUserData: CreateUserInput) {
+    let idCount = mockUsers.length;
+
+    const { name, email, age } = createUserData;
+
+    const newUser = { name, email, age, id: ++idCount };
+    mockUsers.push(newUser);
+    return newUser;
   }
 }

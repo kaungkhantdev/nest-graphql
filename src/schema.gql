@@ -22,3 +22,20 @@ type Query {
   getUserById(id: Int!): User
   getUsers: [User!]
 }
+
+type Mutation {
+  createUser(createUserData: CreateUserInput!): User!
+  createUserSetting(updateData: CreateUserSettingInput!): UserSetting!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String
+  age: Int!
+}
+
+input CreateUserSettingInput {
+  userId: Int!
+  show: Boolean = false
+  isActive: Boolean! = false
+}
